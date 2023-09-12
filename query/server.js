@@ -56,6 +56,10 @@ app.listen(4002, async () => {
     console.log("\nQuery listening on Port 4002")
 
     // Fetch all of the events from the Event API and process them in the handleEvents function
-    const response = await axios.get("http://localhost:4005/events")
-    response.data.forEach(({ type, data }) => handleEvents(type, data))
+    try {
+        const response = await axios.get("http://localhost:4005/events")
+        response.data.forEach(({ type, data }) => handleEvents(type, data))
+    } catch (error) {
+        console.log("Error is : ", error.message)
+    }
 });

@@ -6,7 +6,7 @@ services:
     ports:
       - 3000:3000
     networks:
-      - blog_network
+      - blog
 
   posts:
     container_name: aqibj_posts
@@ -14,7 +14,7 @@ services:
     ports:
       - 4000:4000
     networks:
-      - blog_network
+      - blog
   
   comments:
     container_name: aqibj_comments
@@ -22,7 +22,7 @@ services:
     ports:
       - 4001:4001
     networks:
-      - blog_network
+      - blog
   
   query:
     container_name: aqibj_query
@@ -30,7 +30,7 @@ services:
     ports:
       - 4002:4002
     networks:
-      - blog_network
+      - blog
 
   moderation:
     container_name: aqibj_moderation
@@ -38,7 +38,7 @@ services:
     ports:
       - 4003:4003
     networks:
-      - blog_network
+      - blog
 
   events:
     container_name: aqibj_events
@@ -46,7 +46,7 @@ services:
     ports:
       - 4005:4005
     networks:
-      - blog_network
+      - blog
 
 networks:
-  blog_network:
+  blog:
