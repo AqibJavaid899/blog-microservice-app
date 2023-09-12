@@ -1,0 +1,52 @@
+version: "3.8"
+services:
+  client:
+    container_name: aqibj_client
+    build: ./client
+    ports:
+      - 3000:3000
+    networks:
+      - blog_network
+
+  posts:
+    container_name: aqibj_posts
+    build: ./posts
+    ports:
+      - 4000:4000
+    networks:
+      - blog_network
+  
+  comments:
+    container_name: aqibj_comments
+    build: ./comments
+    ports:
+      - 4001:4001
+    networks:
+      - blog_network
+  
+  query:
+    container_name: aqibj_query
+    build: ./query
+    ports:
+      - 4002:4002
+    networks:
+      - blog_network
+
+  moderation:
+    container_name: aqibj_moderation
+    build: ./moderation
+    ports:
+      - 4003:4003
+    networks:
+      - blog_network
+
+  events:
+    container_name: aqibj_events
+    build: ./event-bus
+    ports:
+      - 4005:4005
+    networks:
+      - blog_network
+
+networks:
+  blog_network:
