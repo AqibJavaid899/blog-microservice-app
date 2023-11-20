@@ -24,7 +24,7 @@ app.post("/posts", async (req, res) => {
   // Create the event payload and generate the PostCreated event
   const event = { type: "PostCreated", data: { id, title } };
   await axios
-    .post("http://localhost:4005/events", event)
+    .post("http://event-bus-srv:4005/events", event)
     .catch((err) => console.log("Error is : ", err));
 
   res.status(201).json(posts[id]);
@@ -39,6 +39,6 @@ app.post("/events", (req, res) => {
 });
 
 app.listen(4000, () => {
-  console.log("There is a new update here... Version 20!!");
+  console.log("New Version 40!!");
   console.log("\nPosts listening on Port 4000");
 });

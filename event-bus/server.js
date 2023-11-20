@@ -1,33 +1,37 @@
 import axios from "axios";
-import express from "express"
+import express from "express";
 
-const app = express()
+const app = express();
 
-app.use(express.json())
+app.use(express.json());
 
-const events = []
+const events = [];
 
 app.get("/events", (req, res) => {
-    // Fetch the Events data and send it back to other microservices
-    res.status(200).json(events)
-})
+  // Fetch the Events data and send it back to other microservices
+  res.status(200).json(events);
+});
 
 app.post("/events", async (req, res) => {
-    const event = req.body;
+  const event = req.body;
 
-    // Storing the event in the In-Memory Event DB
-    events.push(event);
-    
-    console.log("Event Recieved is : ", event.type)
+  // Storing the event in the In-Memory Event DB
+  events.push(event);
 
-    // Catching the event and then pass the received event to all the microservices 
-    await axios.post("http://localhost:4000/events", event).catch((err) => console.log("Error is : ", err))
-    await axios.post("http://localhost:4001/events", event).catch((err) => console.log("Error is : ", err))
-    await axios.post("http://localhost:4002/events", event).catch((err) => console.log("Error is : ", err))
-    await axios.post("http://localhost:4003/events", event).catch((err) => console.log("Error is : ", err))
-    
-     
-    res.status(200).json({ status: "OK" })
-})
+  console.log("Event Recieved is : ", event.type);
 
-app.listen(4005, () => console.log("\nEvent Bus listening on Port 4005"));
+  // Catching the event and then pass the received event to all the microservices
+  await axios
+    .post("http://posts-clusterip-srv:4000/events", event)
+    .catch((err) => console.log("Error is : ", err));
+  await axios.post("http://comments-srv:4001/events", event).catch((err) => console.log("Error is : ", err))
+  await axios.post("http://query-srv:4002/events", event).catch((err) => console.log("Error is : ", err))
+  await axios.post("http://moderation-srv:4003/events", event).catch((err) => console.log("Error is : ", err))
+
+  res.status(200).json({ status: "OK" });
+});
+
+app.listen(4005, () => {
+  console.log("New Version 40!!");
+  console.log("\nEvent Bus listening on Port 4005");
+});

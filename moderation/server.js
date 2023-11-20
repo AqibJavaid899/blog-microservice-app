@@ -21,7 +21,7 @@ app.post("/events", async (req, res) => {
 
         // Create the event payload and generate the CommentModerated event
         const event = { type: "CommentModerated", data }
-        await axios.post("http://localhost:4005/events", event)
+        await axios.post("http://event-bus-srv:4005/events", event)
     }
 
     res.status(200).json({ status: "OK" })

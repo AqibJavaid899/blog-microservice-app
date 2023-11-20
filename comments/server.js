@@ -27,7 +27,7 @@ app.post("/posts/:id/comments", async (req, res) => {
     
     // Create event payload and generate the CommentCreated event
     const event = { type: "CommentCreated", data: { id, content, postId: req.params.id, status: "pending" } }
-    await axios.post("http://localhost:4005/events", event).catch((err) => console.log("Error is : ", err))
+    await axios.post("http://event-bus-srv:4005/events", event).catch((err) => console.log("Error is : ", err))
 
     res.status(201).json(comments)
 })
@@ -47,7 +47,7 @@ app.post("/events", async (req, res) => {
 
         // Create event payload and generate the CommentUpdated event
         const event = { type: "CommentUpdated", data: { id, content, postId, status } }
-        await axios.post("http://localhost:4005/events", event)
+        await axios.post("http://event-bus-srv:4005/events", event)
     }
  
     res.status(200).json({ status: "OK" })
