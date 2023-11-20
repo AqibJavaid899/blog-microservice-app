@@ -57,7 +57,7 @@ app.listen(4002, async () => {
 
     // Fetch all of the events from the Event API and process them in the handleEvents function
     try {
-        const response = await axios.get("http://localhost:4005/events")
+        const response = await axios.get("http://event-bus-srv:4005/events")
         response.data.forEach(({ type, data }) => handleEvents(type, data))
     } catch (error) {
         console.log("Error is : ", error.message)
