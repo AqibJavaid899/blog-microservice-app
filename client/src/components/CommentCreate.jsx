@@ -8,7 +8,7 @@ const CommentCreate = ({ postId }) => {
     e.preventDefault();
     const payload = { content: comment }
     try {
-      const response = await axios.post(`http://localhost:4001/posts/${postId}/comments`, payload);
+      const response = await axios.post(`http://posts.com/posts/${postId}/comments`, payload);
     } catch (error) {
       console.log("Error is : ", error);
     }

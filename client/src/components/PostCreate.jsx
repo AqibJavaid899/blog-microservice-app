@@ -10,7 +10,7 @@ const PostCreate = () => {
         const payload = { title }
 
         try {
-            const response = await axios.post("http://localhost:4000/posts", payload)
+            const response = await axios.post("http://posts.com/posts/create", payload)
 
         } catch (error) {
             console.log("Error is : ", error)
